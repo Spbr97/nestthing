@@ -3,12 +3,15 @@ function renderProducts(productList) {
 
   if (!grid) return; // safety check
 
-  grid.innerHTML = productList.map(product => `
-    <div class="product-card">
+grid.innerHTML = productList.map(product => `
+  <div class="product-card">
+    <div class="product-image">
       <img src="${product.image}" alt="${product.name}">
-      <h4>${product.name}</h4>
-      <p class="price">₹${product.price}</p>
-      <button class="btn-sm">View</button>
     </div>
-  `).join("");
+    <h4>${product.name}</h4>
+    <p class="price">₹${product.price}</p>
+    <button class="btn-sm">View</button>
+  </div>
+`).join("");
+
 }
