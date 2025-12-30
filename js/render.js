@@ -10,8 +10,11 @@ grid.innerHTML = productList.map(product => `
     </div>
     <h4>${product.name}</h4>
     <p class="price">₹${product.price}</p>
-    <button class="btn-sm">View</button>
+    <button class="btn-sm" onclick="viewProduct('${product.id}')">
+      View
+    </button>
   </div>
 `).join("");
+
 
 }
