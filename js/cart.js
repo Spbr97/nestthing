@@ -1,7 +1,8 @@
 const cartItemsContainer = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
+let cart = getCart();
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 
 if (cart.length === 0) {
   cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
@@ -11,41 +12,47 @@ if (cart.length === 0) {
 }
 
 function renderCart() {
-  let total = 0;
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+    cartTotal.innerText = "";
+    return;
+  }
 
   cartItemsContainer.innerHTML = cart.map((item, index) => {
-    total += item.price * item.qty;
-
     return `
-  <div class="cart-item">
-    <img class="cart-thumb" src="${item.image}" alt="${item.name}">
+      <div class="cart-item">
+        <img class="cart-thumb" src="${item.image}" alt="${item.name}">
 
-    <div class="cart-info">
-      <h4>${item.name}</h4>
-      <p class="cart-price">₹${item.price}</p>
-      <div class="cart-qty">
-  <button onclick="changeQty(${index}, -1)">−</button>
-  <span>${item.qty}</span>
-  <button onclick="changeQty(${index}, 1)">+</button>
-</div>
+        <div class="cart-info">
+          <h4>${item.name}</h4>
+          <p class="cart-price">₹${item.price}</p>
 
+          <div class="cart-qty">
+            <button onclick="changeQty(${index}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${index}, 1)">+</button>
+          </div>
 
-      <button class="btn-sm" onclick="removeItem(${index})">
-        Remove
-      </button>
-    </div>
-  </div>
-`;
+          <button class="btn-sm" onclick="removeItem(${index})">
+            Remove
+          </button>
+        </div>
+      </div>
+    `;
   }).join("");
 
-  cartTotal.innerText = `Total: ₹${total}`;
+  // ✅ TOTAL comes from cart-utils.js
+  cartTotal.innerText = `Total: ₹${getCartTotal()}`;
 }
+
 
 function removeItem(index) {
   cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
+  saveCart(cart);
+  updateCartCount();
   renderCart();
 }
+
 function changeQty(index, delta) {
   cart[index].qty += delta;
 
@@ -53,9 +60,12 @@ function changeQty(index, delta) {
     cart[index].qty = 1;
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  saveCart(cart);
+  updateCartCount();
   renderCart();
 }
+
+
 
 function goToCheckout() {
   if (cart.length === 0) {

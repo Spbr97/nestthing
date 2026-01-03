@@ -24,8 +24,10 @@ if (!product) {
     </div>
   `;
 }
+
+
 function addToCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = getCart();
 
   const existingItem = cart.find(item => item.id === product.id);
 
@@ -41,6 +43,7 @@ function addToCart() {
     });
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  saveCart(cart);
+  updateCartCount();
   window.location.href = "cart.html";
 }
