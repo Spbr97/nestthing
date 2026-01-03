@@ -318,3 +318,81 @@ nav a {
 .promo-content strong {
   color: var(--accent);
 }
+
+body {
+  background: #fafafa; /* soft off-white */
+}
+
+/* Section spacing */
+section {
+  padding: 80px 0;
+}
+
+/* White cards on soft bg */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--accent-soft) 100%
+  );
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  margin-top: 16px;
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
+}
+
+/* Improve section title contrast*/
+section h2 {
+  font-size: 32px;
+  margin-bottom: 32px;
+}
+
+
+/* Accent color on nav hover*/
+
+.promo-banner {
+  background: linear-gradient(
+    90deg,
+    #e8f7f4,
+    #ffffff
+  );
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+.promo-icons {
+  font-size: 24px;
+}
+
+
+nav a {
+  position: relative;
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+
+
